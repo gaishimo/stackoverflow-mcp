@@ -20,10 +20,10 @@ import {
 } from "./types/index.js";
 
 const STACKOVERFLOW_API = "https://api.stackexchange.com/2.3";
-// Default custom filter that includes bodies, scores, and other essential fields
-const DEFAULT_FILTER = "!*MZqiDl8Y0c)yVzXS"; // Custom filter for questions with bodies
-const ANSWER_FILTER = "!*MZqiDl8Y0c)yVzXS"; // Custom filter for answers with bodies
-const COMMENT_FILTER = "!*Mg-gxeRLu"; // Custom filter for comments
+// Using built-in filters to avoid "invalid filter specified" error
+const DEFAULT_FILTER = "withbody"; // Built-in filter that includes bodies
+const ANSWER_FILTER = "withbody"; // Built-in filter that includes bodies
+const COMMENT_FILTER = "default"; // Built-in filter for comments
 
 // Rate limiting configuration
 const MAX_REQUESTS_PER_WINDOW = 30; // Maximum requests per window
@@ -515,7 +515,7 @@ export class StackOverflowServer {
       site: "stackoverflow",
       sort: "votes",
       order: "desc",
-      filter: "!nKzQUR30W7",
+      filter: DEFAULT_FILTER,
       tagged: args.tags.join(";"),
       ...(args.limit && { pagesize: args.limit.toString() }),
     });
